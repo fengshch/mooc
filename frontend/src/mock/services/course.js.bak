@@ -1,0 +1,101 @@
+import Mock from 'mockjs2'
+import { builder, getQueryParameters } from '../util'
+const Random = Mock.Random
+
+const categories = () => {
+  return builder({
+    'data': [{
+      'id': 1,
+      'name': '计算机和互联网',
+      'idx': 1
+    }, {
+      'id': 2,
+      'name': '财务会计',
+      'idx': 2
+    }, {
+      'id': 3,
+      'name': '人力资源',
+      'idx': 3
+    }, {
+      'id': 4,
+      'name': '建筑施工',
+      'idx': 4
+    }],
+    'pageSize': 10,
+    'pageNo': 0,
+    'totalPage': 1,
+    'totalCount': 5
+  })
+}
+const courseData = (count) => {
+  const data = []
+  let categoryId = 0
+
+  for (let i = 0; i < count; i++) {
+    categoryId = Random.integer(0, 3)
+    data.push({
+      'id': i + 1,
+      'title': Random.cword(2, 8),
+      'intro': Random.cparagraph(),
+      'content': Random.cparagraph(),
+      'avatar': Random.image('300x200'),
+      'categoryId': categoryId,
+      'categoryName': categories().result.data[categoryId].name,
+      'published': Random.boolean(),
+      'idx': i + 1
+    })
+  }
+
+  return data
+}
+const courses = (options) => {
+  const queryParameters = getQueryParameters(options)
+  console.log('queryParameters', queryParameters)
+
+  if (queryParameters && !queryParameters.count) {
+    queryParameters.count = 50
+  }
+
+  if (queryParameters && !queryParameters.pageNo) {
+    queryParameters.pageNo = 1
+  }
+
+  if (queryParameters && !queryParameters.pageSize) {
+    queryParameters.pageSize = 5
+  }
+  const data = courseData(queryParameters.count)
+  // let categoryId = 0
+
+  // for (let i = 0; i < queryParameters.count; i++) {
+  //   categoryId = Random.integer(0, 3)
+  //   data.push({
+  //     'id': i + 1,
+  //     'title': Random.cword(2, 8),
+  //     'intro': Random.cparagraph(),
+  //     'content': Random.cparagraph(),
+  //     'avatar': Random.image('400x300'),
+  //     'categoryId': categoryId,
+  //     'categoryName': categories().result.data[categoryId].name,
+  //     'published': Random.boolean(),
+  //     'idx': i + 1
+  //   })
+  // }
+  const start = (queryParameters.pageNo - 1) * queryParameters.pageSize
+  const end = (queryParameters.pageNo) * queryParameters.pageSize
+  console.log('start:' + start + ' end: ' + end)
+  return builder({
+    'data': data.slice(start, end),
+    'pageSize': parseInt(queryParameters.pageSize),
+    'pageNo': parseInt(queryParameters.pageNo),
+    'totalPage': Math.ceil(data.length / 10),
+    'totalCount': data.length
+  })
+}
+
+const courseById = () => {
+  return courseData(1)[0]
+}
+
+// Mock.mock(/\/api\/categories/, 'get', categories)
+// Mock.mock(/\/api\/courses\/1/, 'get', courseById)
+// Mock.mock(/\/api\/courses/, 'get', courses)

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="5e7ca072-f2d4-405d-a3d3-74e7c579cb0e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../frontend/.env" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/.env.development" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/.env.development" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/.env.preview" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/.env.preview" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/api/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/api/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Editor/QuillEditor.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Editor/QuillEditor.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/GlobalFooter/GlobalFooter.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/GlobalFooter/GlobalFooter.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/PageHeader/PageHeader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/PageHeader/PageHeader.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Table/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Table/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/tools/Logo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/tools/Logo.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/tools/UserMenu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/tools/UserMenu.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/config/defaultSettings.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/config/defaultSettings.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/config/router.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/config/router.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/core/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/core/bootstrap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/layouts/BasicLayout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/layouts/BasicLayout.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/layouts/UserLayout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/layouts/UserLayout.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/layouts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/layouts/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/permission.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/permission.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/store/getters.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/store/getters.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/store/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/store/modules/permission.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/store/modules/permission.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/store/modules/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/store/modules/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/utils/device.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/utils/device.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/utils/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/utils/request.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/Home.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/views/account/settings/BaseSetting.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/account/settings/BaseSetting.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/views/account/settings/Custom.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/account/settings/Custom.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/views/account/settings/Index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/account/settings/Index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/views/user/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/user/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/vue.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/vue.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/yarn.lock" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../frontend" />
+  </component>
+  <component name="ProjectId" id="1VVy9fvIBdv9CxNYvSRawoKVuJn" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="buildCliOptions" value="" />
+          <option name="command" value="" />
+          <option name="containerName" value="" />
+          <option name="entrypoint" value="" />
+          <option name="imageTag" value="" />
+          <option name="commandLineOptions" value="" />
+          <option name="sourceFilePath" value="Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.Dockerfile" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5e7ca072-f2d4-405d-a3d3-74e7c579cb0e" name="Default Changelist" comment="" />
+      <created>1577352408442</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1577352408442</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2184" y="65" width="619" height="907" key="#Dockerfile" timestamp="1577352578559">
+      <screen x="1600" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2184" y="65" width="619" height="907" key="#Dockerfile/0.97.1600.873/1600.0.1920.1080@1600.0.1920.1080" timestamp="1577352578559" />
+    <state x="2182" y="246" width="624" height="544" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1577352524365">
+      <screen x="1600" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2182" y="246" width="624" height="544" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.97.1600.873/1600.0.1920.1080@1600.0.1920.1080" timestamp="1577352524365" />
+  </component>
+</project>
