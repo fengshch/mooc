@@ -4,7 +4,7 @@
       <div class="top" >
         <Home-header class="my-3"/>
       </div>
-
+      <a-divider type="horizontal"/>
       <route-view></route-view>
 
       <div class="footer margin-top: 10px">

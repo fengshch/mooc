@@ -1,5 +1,8 @@
+from collections import defaultdict
+
 from flask_restplus import marshal
 from sqlalchemy import func
+from sqlalchemy.orm.attributes import set_committed_value
 
 from .. import db
 from ..model.organization import Organization, OrganizationDTO
@@ -23,7 +26,7 @@ def add_new_organization(data):
         save_changes(new_organization)
         response_object = {
             'status': 'success',
-            'message': '机构添加成功',
+            'message': '用户组添加成功',
             'data':  marshal(new_organization, _organization)
         }
         print(response_object)
@@ -31,7 +34,7 @@ def add_new_organization(data):
     else:
         response_object = {
             'status': 'fail',
-            'message': '机构已经存在, 请使用其它名称'
+            'message': '用户组已经存在, 请使用其它名称'
         }
         return response_object, 409
 
@@ -48,9 +51,61 @@ def get_all_organization(page_no, page_size):
     }
 
 
+def get_children_by_id(organization_id):
+    organizations = Organization.query.all()
+    children = defaultdict(list)
+    for organization in organizations:
+        if organization.parent_id:
+            children[organization.parent_id].append(organization)
+    organization = Organization.query.get(organization_id)
+    rtn = list()
+    rtn.append(organization)
+    rtn.extend(get_grandchildren(organization, children))
+    return rtn
+
+
+def get_grandchildren(organization, children):
+    grandchildren = list()
+    grandchildren.extend(children[organization.id])
+    for child in grandchildren:
+        grandchildren.extend(get_grandchildren(child, children))
+    return grandchildren
+
+
 def get_organization_by_id(organization_id):
     organization = Organization.query.filter_by(id=organization_id).first()
-    return organization
+    rtn = {
+        'data': marshal(organization, _organization),
+        'status': 'success'
+    }
+    return rtn
+
+
+def update_organization(data):
+    organization = Organization.query.get(data['id'])
+    organization.name = data['name']
+    organization.fullname = data['fullname']
+    organization.parent_id = data['parent_id']
+    organization.idx = data['idx']
+    db.session.commit()
+    rtn = {
+        'status': 'success',
+        'message': '用户组更改成功',
+        'data': marshal(organization, _organization)
+
+    }
+    return rtn
+
+
+def delete_organization_by_id(organization_id):
+    organization = Organization.query.get(organization_id)
+    db.session.delete(organization)
+    db.session.commit()
+    rtn = {
+        'status': 'success',
+        'message': '删除成功'
+    }
+    return rtn, 201
 
 
 def save_changes(data):

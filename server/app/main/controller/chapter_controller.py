@@ -7,7 +7,7 @@ from webargs.flaskparser import use_args
 
 from ..model.chapter import Chapter, ChapterDTO
 from ..service.chapter_service import add_new_chapter, get_chapters_by_course_id, get_chapter_id, update_chapter, \
-    delete_chapter_by_id
+    delete_chapter_by_id, get_chapters_by_learning_id
 
 api = ChapterDTO.api
 _chapter = ChapterDTO.chapter
@@ -59,3 +59,11 @@ class ChapterList(Resource):
             page_no = args.get('page_no')
             page_size = args.get('page_size')
             return get_chapters_by_course_id(course_id, page_no, page_size)
+
+    @api.route('/learning/<learning_id>')
+    @api.param('learning_id', 'The Learning identity')
+    class ListChapterByLearningID(Resource):
+        @api.doc('list_of_chapters_by_learning_id')
+        def get(self, learning_id):
+            """List all categories"""
+            return get_chapters_by_learning_id(learning_id)

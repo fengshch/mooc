@@ -3,6 +3,7 @@ from sqlalchemy import func
 
 from .. import db
 from ..model.chapter import Chapter, ChapterDTO
+from ..model.learning import Learning
 
 _chapter = ChapterDTO.chapter
 
@@ -38,6 +39,14 @@ def get_chapters_by_course_id(course_id, page_no, page_size):
         'pageSize': page_size,
         'totalPage': rtn.pages,
         'totalCount': rtn.total
+    }
+
+
+def get_chapters_by_learning_id(learning_id):
+    chapters = db.session.query(Chapter)\
+        .filter(Learning.course_id == Chapter.course_id, Learning.id == learning_id).all()
+    return {
+        'data': marshal(chapters, _chapter)
     }
 
 

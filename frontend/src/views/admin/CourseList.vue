@@ -29,6 +29,16 @@
           <router-link :to="{ name: 'ChapterListAdmin', params: { courseId: item.id}}">章节</router-link>
         </div>
         <div slot="actions">
+          <router-link :to="{ name: 'LearningSelectUsers', params: { courseId: item.id}}">分配学员</router-link>
+        </div>
+        <div slot="actions">
+          <a-popconfirm
+            title="确定要删除吗？"
+            @confirm="handleDel(item)">
+            <a>删除</a>
+          </a-popconfirm>
+        </div>
+        <div slot="actions">
           <a-dropdown>
             <a-menu slot="overlay">
               <a-menu-item>
@@ -37,7 +47,9 @@
               <a-menu-item>
                 <router-link :to="{ name: 'ChapterListAdmin', params: { courseId: item.id}}">章节</router-link>
               </a-menu-item>
-              <a-menu-item><a>删除</a></a-menu-item>
+              <a-menu-item>
+                <a @click="handleDel(item)">删除</a>
+              </a-menu-item>
             </a-menu>
             <a><a-icon type="down"/></a>
           </a-dropdown>
@@ -45,7 +57,12 @@
         <div class="list-content">
           <div class="list-content-it">
             <span class="mr-5">{{ item.category_name }}</span>
-            <span class="ml-5">{{ item.published }}</span>
+            <span class="ml-5">
+              <a-switch
+                :checked="item.published"
+                @change="onPublishedChange(index, item.id, item.published)"
+              />
+            </span>
           </div>
         </div>
       </a-list-item>
@@ -55,6 +72,7 @@
 
 <script>
 import courseApi from '@/api/CourseApi'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'CourseList',
@@ -62,16 +80,6 @@ export default {
     return {
       data: [],
       status: 'all',
-      selectedRowKeys: [],
-      selectedRows: [],
-      options: {
-        alert: { show: false },
-        rowSelection: {
-          selectedRowKeys: this.selectedRowKeys,
-          onChange: this.onSelectChange
-        }
-      },
-      optionsAlertShow: false,
       pagination: {
         showSizeChanger: true,
         showQuickJumper: true,
@@ -99,24 +107,23 @@ export default {
     })
   },
   methods: {
-    tableOption () {
-      this.options = {
-        alert: false,
-        rowSelection: null
-      }
-      this.optionsAlertShow = false
-    },
+    ...mapActions(['showAlert']),
     handleAdd () {
       this.$router.push({ name: 'CourseEditAdmin', params: { courseId: 'new' } })
     },
-    handleEdit (record) {
-      console.log(record)
-    },
     handleDel (record) {
-      console.log(record)
-    },
-    handlePublish (record) {
-      console.log(record)
+      courseApi.deleteCourseById(record.id).then(res => {
+        this.loadData()
+        this.showAlert({
+          'type': 'success',
+          'message': res.message
+        })
+      }).catch(err => {
+        this.showAlert({
+          'type': 'error',
+          'message': err.message
+        })
+      })
     },
     loadData () {
       courseApi.getCourses(this.queryParam).then(res => {
@@ -124,11 +131,16 @@ export default {
         this.pagination.pageSize = res.pageSize
         this.pagination.total = res.totalCount
       })
+    },
+    onPublishedChange (index, courseId, checked) {
+      courseApi.updatePublished(courseId, !checked).then(res => {
+        this.data[index].published = res.data
+        this.showAlert({
+          'type': 'success',
+          'message': res.message
+        })
+      })
     }
-  },
-  onSelectChange (selectedRowKeys, selectedRows) {
-    this.selectedRowKeys = selectedRowKeys
-    this.selectedRows = selectedRows
   }
 }
 </script>

@@ -7,6 +7,7 @@ const user = {
   state: {
     access_token: '',
     refresh_token: '',
+    userId: null,
     name: '',
     welcome: '',
     avatar: '',
@@ -20,6 +21,9 @@ const user = {
     },
     SET_REFRESH_TOKEN: (state, refreshToken) => {
       state.refresh_token = refreshToken
+    },
+    SET_USER_ID: (state, userId) => {
+      state.userId = userId
     },
     SET_NAME: (state, { name, welcome }) => {
       state.name = name
@@ -55,7 +59,6 @@ const user = {
     GetInfo ({ commit }) {
       return new Promise((resolve, reject) => {
         getInfo().then(response => {
-          console.log(response)
           const result = response.data
 
           if (result.roles && result.roles.length > 0) {
@@ -73,7 +76,7 @@ const user = {
           } else {
             reject(new Error('getInfo: roles must be a non-null array !'))
           }
-
+          commit('SET_USER_ID', result.id)
           commit('SET_NAME', { name: result.name, welcome: welcome() })
           commit('SET_AVATAR', result.avatar)
 
@@ -95,6 +98,7 @@ const user = {
         }).finally(() => {
           commit('SET_ACCESS_TOKEN', '')
           commit('SET_ROLES', [])
+          commit('SET_USER_ID', null)
           Vue.ls.remove(ACCESS_TOKEN)
         })
       })

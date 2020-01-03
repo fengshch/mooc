@@ -55,14 +55,15 @@ router.beforeEach((to, from, next) => {
       }
     }
   } else {
-    const whiteList = ['login', 'register', 'registerResult'] // no redirect whitelist
-    if (whiteList.includes(to.name) || !to.path.includes('/admin')) {
+    // const whiteList = ['login', 'register', 'registerResult'] // no redirect whitelist
+    // if (whiteList.includes(to.name) || (!to.path.includes('/admin') && to.name !== 'playCourse')) {
+    if (to.path.includes('/admin') || to.name === 'playLearning') {
     // if (to.meta && to.meta.roles && to.meta.roles.length > 0) {
       // 在免登录白名单，直接进入
-      next()
-    } else {
       next({ path: '/user/login', query: { redirect: to.fullPath } })
       NProgress.done() // if current page is login will not trigger afterEach hook, so manually handle it
+    } else {
+      next()
     }
   }
 })

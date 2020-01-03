@@ -15,6 +15,7 @@ class Learning(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     course_id = db.Column(db.Integer, db.ForeignKey('course.id'), nullable=False)
+    progress = db.Column(db.Float, nullable=False, default=0.0)
     idx = db.Column(db.Integer, nullable=False, autoincrement=True)
 
 
@@ -24,5 +25,9 @@ class LearningDTO:
         'id': fields.Integer(description='Chapter ID'),
         'user_id': fields.Integer(Require=True, description="Learning\'s user id"),
         'course_id': fields.Integer(Require=True, description="Learning\'s user id"),
+        'progress': fields.Float(Require=False, default=0, description="Learning\'s progress"),
+        'user_name': fields.String(Require=False, description="Learning\'s user name"),
+        'course_title': fields.String(Require=False, description="Learning\'s course title"),
+        'category_name': fields.String(Require=False, description="Learning\'s category name"),
         'idx': fields.Integer(description='Chapter sorted index')
     })

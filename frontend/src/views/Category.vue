@@ -6,7 +6,7 @@
         <b-media>
           <template v-slot:aside>
             <router-link :to="{ name: 'CourseDetail', params: {courseId: item.id} }">
-              <b-img :src="imageRoot + item.cover" fluid @click="showCourseDetail" style="width:200px; height:150px;"/>
+              <b-img :src="item.cover" fluid @click="showCourseDetail" style="width:200px; height:150px;"/>
             </router-link>
           </template>
           <h5 class="mt-0 mb-2">{{ item.title }}</h5>

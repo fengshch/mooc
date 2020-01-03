@@ -7,7 +7,7 @@ from webargs.flaskparser import use_args
 
 from ..model.course import CourseDTO
 from ..service.course_service import add_new_course, get_all_courses, get_course_by_id, list_courses_by_user_id, \
-    list_courses_by_category_id, update_course, delete_course_by_id
+    list_courses_by_category_id, update_course, delete_course_by_id, update_published
 
 api = CourseDTO.api
 _course = CourseDTO.course
@@ -78,3 +78,12 @@ class CoursesList(Resource):
             page_no = args.get('page_no')
             page_size = args.get('page_size')
             return list_courses_by_category_id(category_id, page_no, page_size)
+
+    @api.route('/publish')
+    class UpdateCoursePublished(Resource):
+        @api.doc('Update course published')
+        def put(self):
+            data = request.json
+            course_id = data.get('course_id')
+            published = data.get('published')
+            return update_published(course_id, published)

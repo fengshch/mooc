@@ -11,8 +11,8 @@ class User(db.Model):
     username = db.Column(db.String(50), unique=True)
     password_hash = db.Column(db.String(100))
     name = db.Column(db.String(100), nullable=False)
-    mobile_phone = db.Column(db.String(11), unique=True)
-    email = db.Column(db.String(255), unique=True, nullable=False)
+    mobile_phone = db.Column(db.String(11), unique=True, nullable=True)
+    email = db.Column(db.String(255), unique=True, nullable=True)
     avatar = db.Column(db.String(255))
     organization_id = db.Column(db.Integer, nullable=True)
     registered_on = db.Column(db.DateTime, nullable=False)
@@ -40,10 +40,10 @@ class UserDto:
     user = api.model('user', {
         'id': fields.Integer(description='User ID'),
         'username': fields.String(required=True, description='user username'),
-        'email': fields.String(required=True, description='user email address'),
-        'password': fields.String(required=True, description='user password'),
+        'email': fields.String(required=False, description='user email address'),
+        'password': fields.String(required=False, description='user password'),
         'name': fields.String(required=True, description='user name'),
-        'mobile_phone': fields.String(description='User mobile phone'),
+        'mobile_phone': fields.String(required=False, description='User mobile phone'),
         'avatar': fields.String(descript='User avatar'),
         'organization_id': fields.Integer(description="Organization Id"),
         'registered_on': fields.DateTime(description='User registered time'),

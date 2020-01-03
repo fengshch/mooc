@@ -5,15 +5,19 @@
         <b-card-img
           :src="course.cover"
           :alt="course.title"
-          left=true
           width="240px"
+          :left="true"
           height="180px"
           style="float:left"
           class="mr-4"/>
-          <!-- style="width:240px; height:180px;max-height:180px; float:left"/> -->
+        <!-- style="width:240px; height:180px;max-height:180px; float:left"/> -->
         <b-card-title>{{ course.title }}</b-card-title>
-        <p>{{ course.intro }} </p>
-        <b-button style="position:absolute; bottom:1rem" variant="success">立即参与</b-button>
+        <b-card-text>{{ course.intro }} </b-card-text>
+        <div v-if="learning" style="position:absolute; bottom:1rem; margin-left: 280px">
+          <b-button variant="success" @click="startLearning()">已选课，进入学习</b-button>
+          <b-button variant="danger" class="ml-3" @click="cancelLearning()">取消选课</b-button>
+        </div>
+        <b-button v-else style="position:absolute; bottom:1rem" variant="success" @click="joinLearning()">立即参与</b-button>
       </b-card-body>
     </b-card>
     <b-tabs class="mt-3">
@@ -42,7 +46,6 @@
                   :key="video.id"
                   class="d-flex justify-content-between align-items-center border-0 p-1"
                   style="border-bottom:0"
-                  :to="{ name: 'playCourse', params: { courseId: courseId, videoId: video.id }}"
                 >
                   <h6 class="text-secondary" >
                     <i class="mr-1">{{ index + 1 }}.{{ vIndex + 1 }}</i>
@@ -64,11 +67,15 @@
 <script>
 import courseApi from '@/api/CourseApi'
 import chapterApi from '@/api/ChapterApi'
+import learningApi from '@/api/LearningApi'
+import { mapGetters } from 'vuex'
 
 export default {
   data () {
     return {
-      course: {},
+      course: {
+        cover: 'null'
+      },
       chapters: {},
       queryParams: {
         courseId: 0,
@@ -78,8 +85,12 @@ export default {
       show: [],
       arrow: [],
       courseId: '',
-      imageRoot: process.env.VUE_APP_IMAGE_ROOT
+      imageRoot: process.env.VUE_APP_IMAGE_ROOT,
+      learning: null
     }
+  },
+  computed: {
+    ...mapGetters(['userId', 'nickname'])
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
@@ -101,7 +112,12 @@ export default {
       this.courseId = this.$route.params.courseId
       courseApi.getCourseById(courseId).then(res => {
         this.course = res.data
+        console.log(this.course)
         this.queryParams.courseId = res.data.id
+        console.log(this.userId)
+        if (this.userId) {
+          this.fetchLearning(this.userId, res.data.id)
+        }
         chapterApi.getChaptersByCourseId(this.queryParams).then(res2 => {
           this.chapters = res2.data
           this.chapters.map((element, index) => {
@@ -120,6 +136,40 @@ export default {
       } else {
         this.$set(this.arrow, index, 'down')
       }
+    },
+    fetchLearning (userId, courseId) {
+      learningApi.getLearningByUserIdAndCourseId(userId, courseId).then(res => {
+        console.log(res)
+        if (res.status === 'success') {
+          this.learning = res.data
+        } else {
+          this.learning = null
+        }
+      })
+    },
+    addLearning (userId, courseId) {
+      learningApi.addLearningByUserIdAndCourseId(userId, courseId).then(res => {
+        this.learning = res.data
+      })
+    },
+    startLearning () {
+      this.$router.push(
+        { name: 'playLearning', params: { learningId: this.learning.id } }
+      )
+    },
+    joinLearning () {
+      if (this.userId) {
+        learningApi.addLearningByUserIdAndCourseId(this.userId, this.courseId).then(res => {
+          this.learning = res.data
+        })
+      } else {
+        this.$router.push({ name: 'login' })
+      }
+    },
+    cancelLearning () {
+      learningApi.deleteLearningById(this.learning.id).then(res => {
+        this.learning = null
+      })
     }
   }
 }

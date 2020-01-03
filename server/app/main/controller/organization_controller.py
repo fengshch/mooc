@@ -1,15 +1,13 @@
 from flask import request
 from flask_jwt_extended import jwt_required
-from flask_restplus import Resource, marshal
-from flask_restplus import fields as r_fields
+from flask_restplus import Resource
 from webargs import fields
 from webargs.flaskparser import use_args
-# from ..util import manager_required
 
 from ..model.organization import OrganizationDTO
 from ..service.organization_service \
-    import add_new_organization, get_all_organization, get_organization_by_id
-
+    import add_new_organization, get_all_organization, get_organization_by_id, update_organization, \
+    delete_organization_by_id
 
 api = OrganizationDTO.api
 _organization = OrganizationDTO.organization
@@ -35,6 +33,16 @@ class OrganizationList(Resource):
         data = request.json
         return add_new_organization(data=data)
 
+    @api.expect(_organization, validate=True)
+    @api.response(201, 'Category successfully updated')
+    # @api.doc('create a new category')
+    # @manager_required
+    @jwt_required
+    def put(self):
+        """update organization"""
+        data = request.json
+        return update_organization(data=data)
+
     @api.route('/<id>')
     @api.param('id', 'The Organization identity')
     @api.response(404, 'Organization not found.')
@@ -46,9 +54,10 @@ class OrganizationList(Resource):
 
             # _organization['children'] = fields.List(r_fields.Nested(OrganizationDTO.organization),
             # description='children')
-            organization = marshal(get_organization_by_id(id), _organization)
-            if not organization:
-                api.abort(404)
-            else:
-                return organization
+            return get_organization_by_id(id)
+
+        @api.doc('delete a organization')
+        def delete(self, id):
+            """delete organization by id"""
+            return delete_organization_by_id(id)
 

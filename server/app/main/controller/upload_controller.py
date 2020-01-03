@@ -65,6 +65,38 @@ class Upload(Resource):
                            'message': '文件上传成功'
                        }, 201
 
+    @api.route('/avatar')
+    class UploadCourseCover(Resource):
+        @api.doc('up load file')
+        def post(self):
+            if 'avatar' not in request.files:
+                return {
+                           'message': 'No file part in the request'
+                       }, 400
+            file = request.files['avatar']
+            if file.filename == '':
+                return {
+                           'message': ' No file selected for uploading'
+                       }, 400
+            if file and allowed_img(file.filename):
+                filename = secure_filename(file.filename)
+                extension = filename.rsplit('.')[1].lower()
+                uid = str(uuid.uuid4())
+                new_filename = uid + '.' + extension
+                pathlib.Path(app.config['UPLOAD_FOLDER'] + '/images/avatar').mkdir(exist_ok=True)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'] + '/images/avatar', new_filename))
+                return {
+                           'file': {
+                               'uid': uid,
+                               'name': new_filename,
+                               'status': 'done',
+                               'response': '{"status": "success"}',
+                               'linkProps': '{"download": "image"}',
+                               'url': '/images/avatar/' + new_filename
+                           },
+                           'message': '文件上传成功'
+                       }, 201
+
     @api.route('/ckfinder')
     class UploadCourseCover(Resource):
         @api.doc('up load file')

@@ -41,7 +41,7 @@
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
-    <div id="banner" v-show="isHome">
+    <div id="banner">
       <b-carousel
         id="carousel-fade"
         :interval="4000"
@@ -55,7 +55,7 @@
         <b-carousel-slide caption="First slide" img-src="/images/banners/01.jpg"></b-carousel-slide>
         <b-carousel-slide caption="Second Slide" img-src="/images/banners/02.jpg"></b-carousel-slide>
         <b-carousel-slide caption="Third Slide" img-src="/images/banners/03.jpg"></b-carousel-slide>
-        <b-carousel-slide caption="Forth Slide" img-src="/imges/banners/04.jpg"></b-carousel-slide>
+        <b-carousel-slide caption="Forth Slide" img-src="/images/banners/04.jpg"></b-carousel-slide>
       </b-carousel>
     </div>
   </div>

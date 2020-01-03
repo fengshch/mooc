@@ -16,8 +16,8 @@
               </router-link>
             </a-menu-item>
             <a-menu-item key="/account/settings/security">
-              <router-link :to="{ name: 'SecuritySettings' }">
-                安全设置
+              <router-link :to="{ name: 'PasswordSettings' }">
+                修改密码
               </router-link>
             </a-menu-item>
             <a-menu-item key="/account/settings/custom">

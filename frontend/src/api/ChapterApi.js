@@ -11,7 +11,12 @@ const chapterApi = {
       }
     })
   },
-
+  getChaptersByLearningId: learningId => {
+    return axios({
+      url: `/chapters/learning/${learningId}`,
+      method: 'get'
+    })
+  },
   getChapterById: id => {
     return axios({
       url: `/chapters/${id}`,

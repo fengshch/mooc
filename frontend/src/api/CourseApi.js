@@ -53,6 +53,17 @@ const courseApi = {
     })
   },
 
+  updatePublished: (courseId, published) => {
+    return axios({
+      url: '/courses/publish',
+      method: 'put',
+      data: {
+        course_id: courseId,
+        published: published
+      }
+    })
+  },
+
   deleteCourseById: courseId => {
     return axios({
       url: `/courses/${courseId}`,

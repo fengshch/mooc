@@ -97,7 +97,6 @@ def update_course(data):
     course.published = data['published']
     course.idx = data['idx']
     db.session.commit()
-    print(course.title)
     rtn = {
         'status': 'success',
         'message': '更改成功',
@@ -114,6 +113,23 @@ def delete_course_by_id(course_id):
         'status': 'success',
         'message': '删除成功'
     }
+    return rtn
+
+
+def update_published(course_id, published):
+    course = Course.query.get(course_id)
+    course.published = published
+    db.session.commit()
+    if course.published:
+        message = '课程发布成功'
+    else:
+        message = '课程取消发布成功'
+    rtn = {
+        'status': 'success',
+        'message': message,
+        'data': course.published
+    }
+    return rtn
 
 
 def save_changes(data):

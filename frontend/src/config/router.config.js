@@ -73,16 +73,59 @@ export const asyncRouterMap = [
 
       // User Management
       {
+        path: '/admin/users',
+        name: 'UserAdmin',
+        component: PageView,
+        meta: { title: '用户管理', keepAlive: true, icon: bxAnaalyse, roles: ['system', 'manager'] },
+        children: [
+          {
+            path: '/admin/groups',
+            name: 'GroupListAdmin',
+            component: () => import('@/views/admin/UserGroupList'),
+            meta: { title: '用户组', keepAlive: true, icon: bxAnaalyse, roles: ['system', 'manager'] }
+          },
+          {
+            path: '/admin/groups/:groupId',
+            name: 'UserGroupEditAdmin',
+            hidden: true,
+            component: () => import('@/views/admin/UserGroupEdit'),
+            meta: { title: '编辑用户组', keepAlive: true, icon: bxAnaalyse, roles: ['system', 'manager'] },
+            props: { parentId: null }
+          },
+          {
+            path: '/admin/users/list',
+            name: 'UserListAdmin',
+            component: () => import('@/views/admin/UserList'),
+            meta: { title: '用户列表', keepAlive: true, icon: bxAnaalyse, roles: ['system', 'manager'] }
+          },
+          {
+            path: '/admin/users/edit',
+            name: 'UserEditAdmin',
+            hidden: true,
+            component: () => import('@/views/admin/UserEdit'),
+            meta: { title: '编辑用户', keepAlive: true, icon: bxAnaalyse, roles: ['system', 'manager'] },
+            props: { userId: null }
+          }
+        ]
+      },
+      {
         path: '/admin/learning',
         name: 'learning',
         component: PageView,
         meta: { title: '学习管理', keepAlive: true, icon: bxAnaalyse, roles: ['system', 'manager', 'user'] },
         children: [
           {
-            path: '/admin/users',
-            name: 'users',
-            component: () => import('@/views/admin/UserList'),
-            meta: { title: '用户列表', keepAlive: true, icon: bxAnaalyse, roles: ['system', 'manager'] }
+            path: '/admin/learnings/list',
+            name: 'LearningList',
+            component: () => import('@/views/admin/LearningList'),
+            meta: { title: '选课列表', keepAlive: true, icon: bxAnaalyse, roles: ['system', 'manager'] }
+          },
+          {
+            path: '/admin/learnings/course/:courseId',
+            name: 'LearningSelectUsers',
+            hidden: true,
+            component: () => import('@/views/admin/LearningUsersSelected'),
+            meta: { title: '选课列表', keepAlive: true, icon: bxAnaalyse, roles: ['system', 'manager'] }
           }
         ]
       },
@@ -119,15 +162,15 @@ export const asyncRouterMap = [
       // account
       {
         path: '/account',
-        component: RouteView,
-        redirect: '/account/course',
+        component: PageView,
+        redirect: '/account/learning',
         name: 'account',
         meta: { title: '个人中心', icon: 'user', keepAlive: true, roles: [ 'system', 'manager', 'user' ] },
         children: [
           {
-            path: '/account/course',
+            path: '/account/learning',
             name: 'MyCourses',
-            component: () => import('@/views/admin/MyCourses'),
+            component: () => import('@/views/admin/MyLearninglist'),
             meta: { title: '我的课程', keepAlive: true, roles: [ 'system', 'manager', 'user' ] }
           },
           {
@@ -145,10 +188,10 @@ export const asyncRouterMap = [
                 meta: { title: '基本设置', roles: [ 'system', 'manager', 'user' ] }
               },
               {
-                path: '/account/settings/security',
-                name: 'SecuritySettings',
-                component: () => import('@/views/account/settings/Security'),
-                meta: { title: '安全设置', keepAlive: true, permission: [ 'user' ] }
+                path: '/account/settings/password',
+                name: 'PasswordSettings',
+                component: () => import('@/views/account/settings/Password'),
+                meta: { title: '修改密码', keepAlive: true, permission: [ 'user' ] }
               },
               {
                 path: '/account/settings/custom',
@@ -212,7 +255,10 @@ export const constantRouterMap = [
       }
     ]
   },
-
+  {
+    path: '/404',
+    component: () => import(/* webpackChunkName: "fail" */ '@/views/exception/404')
+  },
   {
     path: '/',
     component: HomeLayout,
@@ -234,16 +280,11 @@ export const constantRouterMap = [
         component: () => import('@/views/CourseDetail')
       },
       {
-        path: '/play/courses/:courseId',
-        name: 'playCourse',
-        component: () => import('@/views/PlayCourse'),
-        props: { videoId: 0 }
+        path: '/play/learning/:learningId',
+        name: 'playLearning',
+        component: () => import('@/views/PlayLearning'),
+        meta: { title: '安全设置', keepAlive: true, permission: [ 'system', 'manager', 'user' ] }
       }
     ]
-  },
-  {
-    path: '/404',
-    component: () => import(/* webpackChunkName: "fail" */ '@/views/exception/404')
   }
-
 ]

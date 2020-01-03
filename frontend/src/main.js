@@ -7,7 +7,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store/'
 import { VueAxios } from './utils/request'
-import { Tree } from 'ant-design-vue'
+import { Tree, TreeSelect, Transfer } from 'ant-design-vue'
 import VueVideoPlayer from 'vue-video-player'
 import CKEditor from '@ckeditor/ckeditor5-vue'
 
@@ -21,14 +21,18 @@ import './permission' // permission control
 import './utils/filter' // global filter
 import './components/global.less'
 import 'video.js/dist/video-js.css'
+import VueCookies from 'vue-cookie'
 
 Vue.config.productionTip = false
 
 // mount axios Vue.$http and this.$http
 Vue.use(VueAxios)
 Vue.use(Tree)
+Vue.use(Transfer)
 Vue.use(VueVideoPlayer)
 Vue.use(CKEditor)
+Vue.use(TreeSelect)
+Vue.use(VueCookies)
 
 new Vue({
   router,
